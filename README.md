@@ -317,3 +317,5 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) for deta
 **Made with ❤️ for the NationStates community**
 
 *If this bot helps your region, please star the repository! ⭐*
+
+Message me if you want in, on the project.
