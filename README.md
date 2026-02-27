@@ -215,7 +215,7 @@ In Discord, use the interactive menu to configure all settings:
 - 🔧 **Setup & Settings** - Bot permissions, auto-login, prefix, proxy API key
 - 📺 **Channel Setup** - Configure log channels
 - 🌍 **Region Management** - Add/remove regions
-- 📋 **Citizenship Applications** - Setup application system
+- 📋 **Proxy Check Applications** - Setup application system
 - 👥 **Residents Management** - Import and manage residents
 - 🎮 **Telegram Automation** - Configure telegram campaigns
 - 📝 **WA Update Settings** - Configure proposal and resolution tracking
