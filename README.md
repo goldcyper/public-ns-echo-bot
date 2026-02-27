@@ -683,17 +683,21 @@ cat bot.log
 
 ### Commands Not Working
 
-**Check bot is online in Discord**
+**1. Check bot is online in Discord**
+- Verify the bot shows as online in your server member list
 
-**Verify permissions:**
-- Read Messages
-- Send Messages
-- Embed Links
+**2. Verify bot permissions:**
+Make sure the bot role has these permissions:
+- ✅ Read Messages
+- ✅ Send Messages
+- ✅ Embed Links
+- ✅ Attach Files
 
-**Check prefix:**
-```
-?guild_config
-```
+**3. Check command prefix:**
+Run `?guild_config` to check your server's command prefix (default is `?`)
+
+**4. Verify the command exists:**
+Use `?help` to list all available commands
 
 ### Nation Verification Fails
 
