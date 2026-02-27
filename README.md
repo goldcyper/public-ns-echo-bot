@@ -2,30 +2,31 @@
 
 # 🌍 NS Echo Bot
 
-### **The Ultimate NationStates Discord Bot for Region Management & Automation**
+### **The Ultimate NationStates Discord Bot for Nation Lookup & Region Monitoring**
 
 [![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
 [![Discord.py](https://img.shields.io/badge/discord.py-2.3%2B-blue.svg)](https://github.com/Rapptz/discord.py)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
 
-**[Features](#-key-features) • [Quick Start](#-quick-start) • [Documentation](#-table-of-contents) • [Support](#-support)**
+**[Features](#-key-features) • [Quick Start](#-quick-start) • [Commands](#-commands-reference) • [Support](#-support)**
 
 ---
 
 ### 🎯 What is NS Echo Bot?
 
-A powerful, multi-guild Discord bot built for NationStates communities. Automate telegram campaigns, track WA endorsements, manage residents, process citizenship applications, and monitor your regions—all from Discord!
+A powerful, multi-guild Discord bot built for NationStates communities. Get detailed nation information, look up endorsement data, verify nation ownership, search residents, and explore WA resolutions—all from Discord!
 
-### 🌟 Why Choose Echo Bot?
+### 🌟 Key Features
 
 ✨ **Multi-Server Support** - Manage multiple Discord servers with isolated configurations  
 🔐 **Enterprise Security** - AES-256 encryption for all sensitive data  
-🤖 **Telegram Automation** - Automated recruitment, endorsement, and restoration campaigns  
 📊 **Real-Time NS Data** - Live integration with NationStates API  
-👥 **Resident Management** - Track nations across regions with privacy controls  
-🎓 **Citizenship System** - Automated applications with security screening  
-⚡ **High Performance** - Optimized for large regions and high traffic  
+🔍 **Advanced Lookups** - Nation info, endorsement data, region history  
+👥 **Resident Management** - Track and search residents across authorized servers  
+🏛️ **WA Tracking** - Monitor WA nations, endorsements, resolutions & voting patterns  
+🎓 **Secure Verification** - Nation ownership verification with IP tracking  
+⚡ **High Performance** - Optimized memory usage and concurrent processing  
 
 </div>
 
@@ -35,32 +36,27 @@ A powerful, multi-guild Discord bot built for NationStates communities. Automate
 
 ### 🚀 Getting Started
 - [Quick Start](#-quick-start)
-- [Installation](#installation)
-- [First Run](#first-run)
-- [Key Features](#-key-features)
+- [Installation](#-installation)
+- [Requirements](#-requirements)
 
 ### ⚙️ Configuration
 - [CLI Tools Reference](#-cli-tools-reference)
-- [Configuration Guide](#-configuration-guide)
+- [Basic Setup](#-basic-setup)
 - [Multi-Server Setup](#-multi-server-setup)
 
 ### 📝 Commands & Features
 - [Commands Reference](#-commands-reference)
-- [Telegram Automation](#-telegram-automation)
-- [Citizenship Applications](#-citizenship-applications)
-- [Resident Management](#-resident-management)
 - [World Assembly Features](#-world-assembly-features)
+- [Resident Management](#-resident-management)
 
 ### 🔒 Security & Deployment
 - [Security & Privacy](#-security--privacy)
 - [Production Deployment](#-production-deployment)
-- [Backup & Recovery](#backup--recovery)
 
 ### 👨‍💻 Advanced
 - [Developer Guide](#-developer-guide)
-- [API Reference](#api-reference)
 - [Troubleshooting](#-troubleshooting)
-- [FAQ](#-faq)
+- [Werewolf Game Module](#-werewolf-game-module-optional)
 
 ---
 
@@ -74,58 +70,45 @@ git clone https://github.com/goldcyper/ns_echo_bot.git
 cd ns_echo_bot
 ```
 
-**Step 2: Install Dependencies**
+**Step 2: Create Virtual Environment & Install Dependencies**
 ```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-> 💡 **Tip:** Using a virtual environment is recommended!
-> ```bash
-> p✅ Check and install dependencies automatically
-2. 🔑 Prompt for your Discord bot token
-3. 💾 Initialize the database
-4. 🌐 Start the verification server
-5. 🎊 Be ready to use!
+### 🔑 First Run
 
-### 🛠️
-### 🎉 First Run
+**Using the CLI (Recommended):**
+```bash
+# 1. Setup Discord bot token
+python cli/cli_setup.py token
 
+# 2. Configure your guild
+python cli/cli_setup.py guild
+
+# 3. Start the bot
+python bot.py
+```
+
+**Or Using Discord (Interactive Menu):**
 ```bash
 python bot.py
 ```
 
-On first run, the bot will:
-1. Check and install dependencies automatically
-2. Prompt for your Discord bot token
-3. Initialize the database
-4. Start the verification server
-
-### Initial Setup via CLI
-
-```bash
-# 1. Setup bot token
-python cli/cli_setup.py token
-
-# 2. Configure guild settings
-python cli/cli_setup.py guild
-```
-💬 Basic Setup in Discord
-
-In your Discord server, type:
-
+Then in Discord:
 ```
 ?menu
 ```
 
-Then configure in this order:
-
+Use the interactive menu to configure:
 1. 👤 **Bot Permissions** - Add yourself as admin
-2. 🔐 **X-Auto-Login** - Connect your NationStates account
-3. 📺 **Channels** - Set up WA and log channels
-4. 🌍 **Region** - Configure your region
+2. 🔐 **Auto-Login** (Optional) - Add NationStates credentials
+3. 📺 **Channels** (Optional) - Set up logging channels
+4. 🌍 **Regions** (Optional) - Configure monitored regions
 
-### 📦
-### Requirements
+### 📦 Requirements
+
 **Required:**
 - 🐍 Python 3.11 or higher
 - 💬 discord.py >= 2.3.0
@@ -135,904 +118,348 @@ Then configure in this order:
 - 📄 lxml >= 4.9.0
 - ⚡ aiohttp >= 3.8.0
 
-### ✨
-### Key Features
-🌐 **Multi-Guild Support** - Manage multiple Discord servers with isolated configurations  
-📡 **NationStates Integration** - Real-time data from NS API with intelligent caching  
-📨 **Telegram Automation** - Automated recruitment, endorsement & restoration campaigns  
-🏛️ **WA Tracking** - Monitor WA nations, endorsements, and voting patterns  
-👥 **Resident Management** - Track and manage region residents with privacy controls  
-🎓 **Citizenship Applications** - Automated applications with security screening & proxy detection  
-📊 **Region History** - Track nation movements and region history over time  
-🔔 **WA Proposals & Resolutions** - Auto-post new proposals and resolutions to Discord  
-🔐 **Enterprise Security** - AES-256 encryption, IP hashing, and audit logging  
-⚡ **High Performance** - Optimized memory usage and concurrent processing  
-🛠️ CLI Tools Reference
+---
+
+## 🛠️ CLI Tools Reference
 
 ### 📋 Overview
 
-The bot includes three powerful CLI tools located in the `cli/` directory:
+The bot includes three CLI tools located in the `cli/` directory:
 
-| Tool | Purpose | Use When |
-|------|---------|----------|
-| 🔧 **cli_setup.py** | Bot configuration & credentials | Setting up new servers or updating settings |
-| 🚀 **cli_server.py** | Service management & monitoring | Starting, stopping, or checking bot status |
-| 💾 **cli_data.py** | Database operations & imports | Importing data, backups, or managing residents |omated application system
+| Tool | Purpose |
+|------|---------|
+| 🔧 **cli_setup.py** | Bot configuration & credentials |
+| 🚀 **cli_server.py** | Service management & monitoring |
+| 💾 **cli_data.py** | Database operations & imports |
 
----
+### 🔧 cli_setup.py - Bot Configuration
 
-## CLI Tools Reference
+Configure Discord bot token and guild settings.
 
-### Overview
-
-The bot includes three main CLI tools located in the `cli/` directory:
-
-1. **cli_setup.py** - Bot configuration
-2. **cli_server.py** - Server management
-3. *🔧 cli_setup.py - Bot Configuration
-
-Configure bot settings and guild preferences securely.
-
-#### 🔑igure bot settings and guild preferences.
-
-#### Setup Bot Token
-
+**Setup Bot Token:**
 ```bash
 python cli/cli_setup.py token
 ```
-✨ **Features:**
-- 🔐 Prompts for Discord bot token
-- 🔒 Encrypts and stores token securely using AES-256
-- ✅ Validates token format before saving
-- 💾 Stores in encrypted database
+Encrypts and stores your Discord bot token securely using AES-256.
 
-#### ⚙️ Setup Guild Configuration
-
+**Setup Guild Configuration:**
 ```bash
-📝 **Interactive menu for:**
+python cli/cli_setup.py guild
+```
+Interactive menu for:
 - 🌍 Add/remove guild regions
 - 🔐 Configure API credentials (nation/password)
 - ✅ Enable/disable regions for monitoring
-- 📧 Set contact consent settings
-- 🎨 Customize per-guild settings
 
-#### ❓t contact consent settings
+### 🚀 cli_server.py - Server Management
 
-#### Help
+Start, stop, and monitor bot services.
 
-```bash
-python cli/cli_setup.py --help
-```
-🚀 cli_server.py - Server Management
-
-Start, stop, and monitor bot services with ease.
-
-#### 💬
-Start and manage bot services.
-
-#### Start Discord Bot Only
-
+**Start Discord Bot:**
 ```bash
 python cli/cli_server.py bot
-✨ **What happens:**
-- 🤖 Starts Discord bot service
-- 📡 Bot will auto-start Echo API if needed
-- 🔄 Automatic reconnection on errors
-- ⏹️ Press Ctrl+C to stop gracefully
-
-#### 📡
-#### Start Echo API Only
-
-```bash
-✨ **Features:**
-- 📊 Starts Echo API data processing service
-- 🌍 Handles NationStates daily dumps
-- 💾 Updates nation/region history database
-- ⏹️ Press Ctrl+C to stop
-
-#### 🚀ess Ctrl+C to stop
-
-#### Start Both Services
-✨ **Coordinated startup:**
-- 1️⃣ Starts Echo API first (waits for ready)
-- 2️⃣ Then starts Discord bot
-- 🏥 Health checks ensure proper startup
-- 🔄 Both services restart together on errors
-- ⏹️ Press Ctrl+C to stop all services gracefully
-
-#### 📊en starts Discord bot
-- Coordinated startup with health checks
-- Press Ctrl+C to stop all services
-📋 **Shows:**
-- 🟢 Running status of all services
-- 🆔 Process IDs (PIDs)
-- 🏥 API health information
-- 💾 Database status
-- 📊 Memory usage
-
----
-
-### 💾 cli_data.py - Data Management
-
-Manage database imports, exports, backups, and resident data like a pro!
-
-#### 📥
-
-### cli_data.py - Data Management
-
-✨ **Features:**
-- 📦 Default: `echo_api_deployment.db.gz`
-- 🗜️ Automatic decompression
-- 💾 Imports complete database
-- ✅ Verifies integrity after import
-- 📊 Shows table statistics and row counts
-
-#### 📄on cli/cli_data.py import [backup_file]
-```
-- Default: `echo_api_deployment.db.gz`
-- Decompresses and imports database
-- Verifies integrity after import
-✨ **Perfect for GitHub deployments:**
-- 📁 Imports from `echo_api_deploy/` directory
-- 1️⃣ Applies schema first, then data parts sequentially
-- ⏱️ Takes 10-20 minutes depending on system
-- 📊 Progress shown for each part file
-- 🔄 Automatic error recovery
-```bash
-pytho📤 Export to SQL Shards
-
-```bash
-python cli/cli_data.py export
-```
-✨ **For GitHub/version control:**
-- 💾 Exports `echo_api.db` to SQL shards
-- 📁 Creates files in `echo_api_deploy/` directory
-- ✂️ Splits data into 24MB chunks (GitHub file size limit)
-- 📋 Generates schema and index files separately
-- 🔢 Creates numbered part files (part_001, part_002, etc.)
-
-#### 📦on cli/cli_data.py export
-```
-- Exports `echo_api.db` to SQL shards
-✨ **Full backup creation:**
-- 📦 Creates `echo_api_deployment.db.gz`
-- 🚀 Optimizes database before compression (VACUUM)
-- ✅ Verifies integrity after compression
-- 📝 Includes metadata file with timestamp
-- 🗜️ High compression ratio (typically 10:1)
-
-#### 👥
-```bash
-python cli/cli_data.py backup
-```
-- Creates `echo_api_deployment.db.gz`
-- Optimizes database before compression
-✨ **Flexible import:**
-- 📄 Imports resident data from local CSV file
-- 📊 Supports Google Sheets URLs (auto-converts to CSV)
-- ➕ Creates new nation records automatically
-- 🔄 Updates existing resident information
-- 📈 Shows detailed import statistics
-- 🔐 Encrypts IP addresses automatically
-
-**CSV Format (Required)
-python cli/cli_data.py residents <file_or_url>
-```
-- Imports resident data from CSV file
-- Supports Google Sheets URLs (auto-converts to CSV)
-- 💡 Google Sheets Example:**
-```bash
-python cli/cli_data.py residents "https://docs.google.com/spreadsheets/d/ABC123/edit"
 ```
 
-> **Tip:** The bot automatically converts Google Sheets to CSV format!
-
-#### 🌍on,discord_id,citizen,admin_permission,contact_consent,opt_in_telegram
-nation_name,123456789,yes,no,yes,no
+**Start Echo API:**
+```bash
+python cli/cli_server.py api
 ```
 
-**Google Sheets Example:**
-✨ **Auto-populate residents:**
-- 🌍 Fetches data from all enabled regions
-- 🏛️ Processes WA nations automatically
-- 🤝 Updates resident endorsement counts
-- 📊 Shows before/after statistics
-- 🔄 Can be run repeatedly for updates
-
----
-
-### 🎯 Common CLI Workflows
-
-> **These are the most common task sequences you'll use!**
-
-#### 🆕pulates residents table from enabled regions
-- Processes WA nations data
-- Updates resident endorsement counts
-- Shows before/after statistics
-
----
-
-### Common CLI Workflows
-
-#### First Time Setup
+**Start Both Services:**
 ```bash
-# 1. Setup bot token
-python cli/cli_setup.py token
-
-# 2. Import database (choose one method)
-python cli/cli_data.py import echo_api_deployment.db.gz
-# OR🚀 
-python cli/cli_data.py import-sql
-
-# 3. Configure guild
-python cli/cli_setup.py guild
-
-# 4. Import residents (optional)
-python cli/cli_data.py residents residents.csv
-
-# 5. Start bot
-python bot.py
-```👨‍💻 
-
-#### Regular Deployment
-```bash
-# Update database
-python cli/cli_data.py import echo_api_deployment.db.gz
-
-# Start services
 python cli/cli_server.py both
 ```
 
-#### Development Workflow
+**Check Status:**
 ```bash
-# Start API in one terminal
-python cli/cli_server.py api
+python cli/cli_server.py status
+```
 
-# S📝 Commands Reference
+### 💾 cli_data.py - Data Management
 
-### 🎮
-# Check status
-python cli/cli_server.py status Admin Only |
-|---------|-------------|---------|:----------:|
-| `?menu` | 🎛️ Interactive configuration menu | `?menu` | ✅ |
-| `?guild_config` | ⚙️ Show server configuration | `?guild_config` | ✅ |
-| `?health` | 🏥 Check bot status & uptime | `?health` | ❌ |
-| `?help` | ❓ Show all commands | `?help` | ❌ |
+Manage database imports, exports, and resident data.
 
-### 🔐 Core Commands
+**Import Database:**
+```bash
+python cli/cli_data.py import echo_api_deployment.db.gz
+```
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `?menu` | Interactive configuration menu | `?menu` |
-| `?guild_config` | Show server con Admin Only |
-|---------|-------------|---------|:----------:|
-| `?verify <nation>` | ✅ Verify nation ownership | `?verify Test_Nation` | ❌ |
-| `?whois <user/nation>` | 🔍 Check verification status | `?whois @User` or `?whois Nation` | ❌ |
-| `?unverify <user>` | ❌ Remove verification | `?unverify @User` | ✅ |
+**Create Backup:**
+```bash
+python cli/cli_data.py backup
+```
 
-### 🏛️ommand | Description | Example |
-|---------|-------------|---------|
-| `?verify <nation>` | Verify nation ownership | `?verify Test_Nation` |
-| `?whois <user/nation>` | Check verification status | `?whois @User` or `?whois Nation` |
-| `?unverify <user>` | Remove verif Admin Only |
-|---------|-------------|---------|:----------:|
-| `?newnations [region]` | 🆕 List new WA nations in region | `?newnations Lazarus` | ❌ |
-| `?wanations <region>` | 🌍 List all WA nations | `?wanations Lazarus` | ❌ |
-| `?ga [id]` | 🏛️ Show GA resolution (current or by ID) | `?ga` or `?ga 123` | ❌ |
-| `?sc [id]` | 🛡️ Show SC resolution (current or by ID) | `?sc` or `?sc 456` | ❌ |
-| `?proposals` | 📋 Show active WA proposals | `?proposals` | ❌ |
-| `?check_proposals` | 🔄 Manually check for new proposals | `?check_proposals` | ✅ |
- Admin Only |
-|---------|-------------|---------|:----------:|
-| `?listresident <search>` | 🔍 Search residents (current server only) | `?listresident john` | ✅ |
-| `?residents <search>` | 🌐 Search all authorized servers | `?residents john` | ✅ |
-| `?addresident <nation>` | ➕ Add resident manually | `?addresident Nation_Name` | ✅ |
+**Import Residents from CSV:**
+```bash
+python cli/cli_data.py residents residents.csv
+```
 
-### 🎓
-| Command | Description | Example |
-|---------|-------------|---------|
-| `?listresident <search>` | Search residents (current server) | `?listresident john` |
-| `?residents <search>` | Search all authorized servers | `?residents john` |
-| `?addresident <nation>` | Add resident manually | `?addresident Nation_Name` |
- Admin Only |
-|---------|-------------|---------|:----------:|
-| `?citizenship` | 📝 Start citizenship application | `?citizenship` | ❌ |
-| `?applications` | 📋 View pending applications | `?applications` | ✅ |
-
-### 📨?citizenship` | Start application | `?citizenship` |
-| `?applications` | View pending applications | `?applications` |
- Admin Only |
-|---------|-------------|---------|:----------:|
-| `?telegram_status` | 📊 Check automation status & stats | `?telegram_status` | ✅ |
+**Import Residents from Google Sheets:**
+```bash
+python cli/cli_data.py residents "https://docs.google.com/spreadsheets/d/SHEET_ID/edit"
+```
 
 ---
 
-### 🌍 World Assembly Features
+## ⚙️ Basic Setup
 
-Echo Bot includes comprehensive WA tracking and automation:
+### Configuration via `?menu`
 
-#### 📊 Automatic Monitoring
-- ✅ **Resolutions** - Auto-post new GA/SC resolutions to Discord
-- ✅ **Proposals** - Track proposals seeking quorum (checks every 15 minutes)
-- ✅ **Voting Stats** - Display vote percentages and delegate voting
-- ✅ **Historical Lookup** - Query past resolutions by ID
+In Discord, use the interactive menu to configure all settings:
 
-#### 🏛️ Resolution Commands
-
-**View Current Resolution:**
 ```
-?ga          # General Assembly current resolution
-?sc          # Security Council current resolution
+?menu
 ```
 
-**View Historical Resolution:**
+**Main Options:**
+- 🔧 **Setup & Settings** - Bot permissions, auto-login, prefix, proxy API key
+- 📺 **Channel Setup** - Configure log channels
+- 🌍 **Region Management** - Add/remove regions
+- 📋 **Citizenship Applications** - Setup application system
+- 👥 **Residents Management** - Import and manage residents
+- 🎮 **Telegram Automation** - Configure telegram campaigns
+- 📝 **WA Update Settings** - Configure proposal and resolution tracking
+
+### Viewing Current Configuration
+
 ```
-?ga 123      # GA resolution #123
-?sc 456      # SC resolution #456
+?guild_config
 ```
 
-**Display Options:**
-```
-?ga text                  # Show full resolution text
-?ga votes                 # Show voting statistics
-?ga delegates             # Show top 10 delegate votes
-?ga nations               # Show nation vote counts
-?ga text votes delegates  # Combine multiple options
-```
-
-#### 📋 Proposal Tracking
-
-**What Gets Posted:**
-- ✅ GA proposals with ≥56 approvals + legal decision
-- ✅ SC proposals with ≥1 approval + legal decision
-- ✅ Creates individual Discord threads for each proposal
-- ✅ Full proposal details in thread, summary in channel
-- ✅ Tracks posted proposals per guild (no duplicates)
-
-**Manual Check:**
-```
-?check_proposals  # Force immediate proposal check
-```
-| Command | Description | Example |
-|---------|-------------|---------|
-| `?telegram_status` | Check automation status | `?telegram_status` |
+Shows your server's current configuration including:
+- 🌍 Monitored regions
+- 🔐 Active credentials
+- 📺 Configured channels
+- 👥 Resident statistics
+- ✅ Verification data
 
 ---
 
 ## 🌐 Multi-Server Setup
 
-### 📋 Overview
+### Overview
 
-Run Echo Bot on multiple Discord servers simultaneously, each with:
-- 🌍 Different NationStates regions
-- 🔐 Separate credentials (nation/password)
-- ⚙️ Independent configurations
-- 💾 Isolated data per server
-
-### 🏗️ Architecture
+Run Echo Bot on multiple Discord servers simultaneously with completely isolated configurations:
 
 ```
 Bot Instance
 ├── 🏛️ Server A (Lazarus)
 │   ├── Region: Lazarus
-│   ├── Credentials: Nation_A + Password_A
-│   └── Settings: Independent config
-└── 🌊 Server B (The Pacific)
-    ├── Region: The Pacific
-    ├── Credentials: Nation_B + Password_B
-    └── Settings: Independent config
+│   ├── Credentials: your_nation_a + password_a
+│   └── Settings: Independent configuration
+└── 🌊 Server B (The East Pacific)
+    ├── Region: The East Pacific
+    ├── Credentials: your_nation_b + password_b
+    └── Settings: Independent configuration
 ```
 
-### 🚀 Setup Steps
+### Setup Steps
 
-#### 1️⃣ Invite Bot to Multiple Servers
+#### 1. Invite Bot to Multiple Servers
 
 Use the same Discord bot token for all servers.
 
-> **💡 Pro Tip:** Generate your bot invite link at [Discord Developer Portal](https://discord.com/developers/applications)
+**Generate your bot invite link at:** [Discord Developer Portal](https://discord.com/developers/applications)
 
-**On Server A (Lazarus):**
+**On Server A:**
 ```
-?menu
-→ 🔧 Setup & Settings
-→ 🔐 Setup X-Auto-Login (enter Nation_A credentials)
-→ 🌍 Region Management (add and enable Lazarus)
+?menu → Setup & Settings → Add User ID for Bot Permissions
+?menu → Region Management → Enable Region
 ```
 
-**On Server B (The Pacific):**
+**On Server B:**
 ```
-?menu
-→ 🔧 Setup & Settings
-→ 🔐 Setup X-Auto-Login (enter Nation_B credentials)
-→ 🌍 Region Management (add and enable The Pacific)
+?menu → Setup & Settings → Add User ID for Bot Permissions
+?menu → Region Management → Enable Region
 ```
 
-#### 3️⃣
-
-#### 3. Verify Isolation
+#### 2. Verify Isolation
 
 Run in each server:
 ```
 ?guild_config
 ```
 
-Each server will show its own:
-- 🌍 Region configuration
-- 🔐 Credentials (nation name only, password hidden)
-- 📺 Channel settings  
-- ✅ Verification data
-- 📊 Independent statistics
-
-### 🤝 Data Sharing
-
-#### 👥 Resident Database Sharing
-
-Allow specific servers to access your resident data:
-👥 Residents Management → 🔓 Authorize Guild Access
-```
-
-**🔒 Privacy Controls:**
-- 🔐 IP addresses only visible to origin server admins
-- 👀 Other servers see nation names and basic info only
-- ❌ Access can be revoked anytime
-- 📝 Audit logging for all access
-
-#### 🌐cess can be revoked anytime
-
-#### Cross-Server Search
-
-Users with permissions can search across authorized servers:
-
-```
-**📊 Results show:**
-- 🏷️ Nation names
-- 💬 Discord usernames (if verified)
-- 🏠 Server origin
-- 📋 Basic resident info
-- ✅ Verification status
+Each server shows its own independent configuration and statistics.
 
 ---
 
-## ⚙️ Configuration Guide
+## 📝 Commands Reference
 
-### 🎛️
-## Configuration Guide
+### 🔐 Verification Commands
 
-### Menu Systemconfiguration menu:
+| Command | Description | Usage |
+|---------|-------------|-------|
+| `?verify <nation>` | Verify you own a NationStates nation | `?verify Lazarus` |
+| `?whois <user/nation>` | Check if user/nation is verified | `?whois @User` or `?whois Lazarus` |
+| `?proxy` | Check your IP security (VPN/proxy detection) | `?proxy` |
 
-```
-?menu
-```
+### 📊 Nation Lookup Commands
 
-> **💡 Tip:** The menu system is the easiest way to configure the bot! All settings can be managed through interactive prompts.
+| Command | Description | Usage |
+|---------|-------------|-------|
+| `?nation <nation>` | Get detailed nation info, region history | `?nation Lazarus` |
+| `?endorse <nation>` | Show nations this nation hasn't endorsed yet | `?endorse Lazarus` |
+| `?spdr <nation>` | Show a nation's influence score | `?spdr Lazarus` |
+| `?nsregion <region>` | Get detailed region information | `?nsregion Lazarus` |
 
-### 📂 Main Sections
+### 👥 Resident Commands
 
-#### 🔧 1. Setup & Settings
+| Command | Description | Admin Only | Usage |
+|---------|-------------|:----------:|--------|
+| `?residents [search]` | Search residents across authorized servers | ❌ | `?residents john` |
+| `?listresident [search]` | Search residents in this server | ✅ | `?listresident john` |
+| `?resident <nation>` | Show detailed resident information | ❌ | `?resident Lazarus` |
 
-**👤 Bot Permissions**
-- ➕ Add/remove admin users
-- 🎮 Control who can configure the bot
-- 🔒 Server-specific admin lists
+### 🏛️ Endorsement Commands
 
-**🔐 X-Auto-Login**
-- 🔗 Connect NationStates account
-- 🔒 AES-256 encrypted credential storage
-- 🌍 Multiple nations supported per server
-- 🔄 Update credentials anytime
+| Command | Description | Usage |
+|---------|-------------|-------|
+| `?ne <nation>` | List nations endorsing this WA nation | `?ne Lazarus` |
+| `?nec <nation>` | Count nations endorsing this WA nation | `?nec Lazarus` |
+| `?nne <nation>` | List regional WA nations NOT endorsing this nation | `?nne Lazarus` |
+| `?nnec <nation>` | Count regional WA nations NOT endorsing this nation | `?nnec Lazarus` |
 
-**🎨 Change Command Prefix**
-- 📝 Default: `?`
-- ✏️ Change to `!`, `.`, `~`, or any custom prefix
-- 💬 Avoid conflicts with other bots
+### 🌍 WA & Region Commands
 
-**🛡️ Proxy Check API Key**
-- 🔐 For citizenship application security
-- 🆓 Get free key from [proxycheck.io](https://proxycheck.io)
-- 🌐 Detects VPNs, proxies, and suspicious IPs
+| Command | Description | Usage |
+|---------|-------------|-------|
+| `?newnations [region]` | Show recent WA applicants | `?newnations Lazarus` |
+| `?regionupdate <region>` | Show region update times | `?regionupdate Lazarus` |
+| `?updateallregions` | Update all region times (admin only) | `?updateallregions` |
 
-#### 📺 2. Channel Setup
+### ⚖️ World Assembly Commands
 
-**📋 Log Channel**
-- 🤖 Bot activity logs
-- ⚠️ Error notifications
-- 📊 Command usage tracking
+| Command | Description | Usage |
+|---------|-------------|-------|
+| `?ga [id] [options]` | Show GA resolution | `?ga` or `?ga 123` or `?ga 123 votes` |
+| `?sc [id] [options]` | Show SC resolution | `?sc` or `?sc 456 text votes` |
+| `?check_proposals` | Manually check for new proposals (admin) | `?check_proposals` |
 
-**🏛️ WA Resolutions Channel**
-- 📢 New WA proposals
-- 🗳️ Voting updates
-- ✅ Resolution results
-- 📊 Voting statistics
+**Resolution Display Options:**
+- `text` - Show full resolution text
+- `votes` - Show voting statistics
+- `delegates` - Show top 10 delegate votes
+- `nations` - Show nation vote counts
 
-**🆕 New WA Nations Channel**
-- 🎉 Notifications when nations join WA
-- 🌍 Region-specific filtering
-- 📈 Growth tracking
+### 🎴 Trading Card Commands
 
-**🧵 WA Thread Settings**
-- 🔄 Auto-create threads for resolutions
-- 🎨 Custom thread names with `{date}` / `{time}` placeholders
-- 📅 Auto-archive duration (1 hour to 1 week)
-- 💬 Keeps discussions organized
+| Command | Description | Usage |
+|---------|-------------|-------|
+| `?card [season] <nation/id>` | Get trading card info | `?card Lazarus` or `?card 5 Lazarus` |
+| `?deck <nation>` | Get nation's trading card deck | `?deck Lazarus` |
 
-#### 🌍 3. Region Management
+### 🎛️ Bot Management Commands
 
-**➕ Add/Enable Regions**
-- 🌐 Monitor multiple regions simultaneously
-- ✅ Enable/disable tracking per region
-- 🔄 Real-time data updates
-- 📧 Recruitment**
-- 👋 Welcome new nations to region
-- 🤖 Auto-send on nation creation
-- 🎯 Target specific criteria
-
-**🔄 Restorer**
-- 🎯 Target nations that recently moved
-- 📢 Re-recruitment campaigns
-- ⏱️ Customizable timing
-
-**🤝 Endorsements**
-- 💬 Request endorsements from WA members
-- 📈 Boost delegate influence
-- 🎯 Smart targeting
-
-**⚠️ Over Cap**
-- 🛡️ Ask nations to reduce endorsements
-- 🔐 Security Council enforcement
-- 🚨 Automatic monitoring
-
-**⚙️ Each type includes:**
-- ✅ Enable/disable toggle
-- ✏️ Custom message templates with variables
-- ⏰ Scheduling options
-- 🎯 Target filters and conditions
-- 📊 Daily send limits
-- 📈 Statistics tracking
-
-#### 🎓 5. Citizenship Applications
-
-**📝 Transcript Channel**
-- 📋 Where applications are posted
-- 👥 Admin review and voting
-- 🔒 Private and secure
-- 📊 Application statistics
-
-**❓ Question Management**
-- ✏️ Customize application questions
-- ➡️ Add conditional questions
-- 📊 Multiple choice or text responses
-- 🔢 Unlimited questions
-
-**🛡️ Proxy Verification**
-- 🤖 Automatic VPN/proxy detection
-- 🌐 IP address security checks
-- 🔍 Resident IP matching
-- 📊 Security scoring
-
-#### 👥 6. Residents Management
-
-**📥 Import from CSV/Google Sheets**
-- 📊 Bulk import resident data
-- 🔗 Direct Google Sheets integration
-- 🔄 Update existing records
-- ➕ Create new entries
-
-**🤝 Cross-Guild Access**
-- 🔓 Share residents with other servers
-- 🔒 Privacy controls per guild
-- 📝 Audit loggingkey purposes:
-
-| Type | Purpose | Icon |
-|------|---------|:----:|
-| **Recruitment** | Welcome new nations | 👋 |
-| **Restorer** | Re-recruit nations that left | 🔄 |
-| **Endorsements** | Request endorsement swaps | 🤝 |
-| **Over Cap** | Ask nations to reduce endorsements | ⚠️ |
-
-### ⚙️ Generate reports
-- 📋 Batch operations
+| Command | Description | Usage |
+|---------|-------------|-------|
+| `?menu` | Open interactive configuration menu | `?menu` |
+| `?guild_config` | Display current guild configuration | `?guild_config` |
+| `?health` | Check bot health and running tasks (admin) | `?health` |
+| `?memory` | Check memory usage (admin) | `?memory` |
+| `?telegram_task_status` | Check telegram automation status (admin) | `?telegram_task_status` |
 
 ---
 
-## 📨 Telegram Automation
+## 🌍 World Assembly Features
 
-### 📋ee [Resident Management](#resident-management) section
+### 📊 Automatic Monitoring
 
-**Cross-Guild Access**
-- Share residents with other servers
-- Privacy controls
-📨 Telegram Automation
+The bot can optionally monitor:
+- ✅ New WA proposals (checks automatically)
+- ✅ New WA resolutions
+- ✅ WA voting patterns
+- ✅ Nation endorsements
 
-### 👋 Recruitment Telegrams
+### Resolution Lookup
 
-**🎯 
+**View Current Resolutions:**
+```
+?ga          # General Assembly current resolution
+?sc          # Security Council current resolution
+```
+
+**View Historical Resolutions:**
+```
+?ga 123      # GA resolution #123
+?sc 456      # SC resolution #456
+```
+
+**Display Full Details:**
+```
+?ga 123 text votes delegates    # Show text, voting stats, and top delegates
+```
+
+### Proposal Tracking
+
+**Manual Check:**
+```
+?check_proposals    # Force immediate check for new proposals
+```
+
+The bot tracks proposals and posts them to Discord when they meet criteria.
+
 ---
 
-## Telegram Automation
+## 👥 Resident Management
 
 ### Overview
 
-Automate NationStates telegram campaigns for four purposes:
-1. **Recruitment** - Welcome new nations
-2. **Restorer** - Re-recruit nations that left
-3. **Endorsements** - Request endorsement swaps
-4. **Over Cap** - Ask nations to reduce endorsements
-
-### Configuration
-
-Access via `?menu` → Telegram Automation
-
-### Recruitment Telegrams
-⚙️ Setup:**
-1. ✅ Enable recruitment automation
-2. ✏️ Set custom welcome message (BBCode supported)
-3. ⏰ Configure send schedule (daily recommended)
-4. 🌍 Set target region
-5. 🎯 Optional: Add filters (WA only, age, etc.)
-
-**📝  Configure send schedule (daily recommended)
-👋 Welcome to [region]Lazarus[/region], @@NATION@@!
-
-We're glad you're here. Check out our [dispatch=123456]📚 Regional Guide[/dispatch] to get started.
-
-Join our [url=discord.gg/example]💬 Discord server[/url] for community chat!
-
-Looking forward to seeing you around! 🌟
-```
-
-**🔧 Variables:**
-- `@@NATION@@` - Replaced with recipient's nation name
-- `[region]...[/region]` - Creates NS region link
-- `[dispatch=ID]...[/dispatch]` - Links to dispatch
-- `[url=...]...[/url]` - External links
-
-### 🔄 Restorer Telegrams
-
-**🎯 `[url=...]...[/url]` - External links
-
-### Restorer Telegrams
-⚙️ Setup:**
-1. ✅ Enable restorer automation
-2. ✏️ Set custom message
-3. 📅 Configure minimum days since move (recommended: 7-30 days)
-4. 🎯 Set maximum targets per day
-5. 🔍 Optional: Filter by previous region
-
-**💡 Use Case:** Nations that left your region might return if reminded of what they're missing!
-
-### 🤝 Endorsement Telegrams
-
-**🎯 
-##⚙️ Setup:**
-1. ✅ Enable endorsement automation
-2. 🏷️ Set your nation (delegate or candidate)
-3. ✏️ Configure message
-4. 🎯 Set daily send limit
-5. 🔍 Filter: Only target WA members who haven't endorsed you
-
-**📊 Smart Targeting:**
-- ❌ Skips nations that already endorsed you
-- ✅ Only targets WA members in your region
-- 🔄 Updates endorsement list automatically
-
-##⚙️ Setup:**
-1. ✅ Enable over cap automation
-2. 📊 Set endorsement cap limit (e.g., 50% of delegate's endorsements)
-3. ✏️ Configure message
-4. 🤖 Automatic targeting of nations over limit
-5. 🔔 Optional: Alert admins when triggered
-
-**🛡️ Security Use Case:** Prevent influence coups and maintain regional security
-
-### ⏱️ Rate Limiting
-
-All telegram types respect NS API rules:
-- ⏰ 10 second cooldown between telegrams
-- 🤖 Automatic rate limiting
-- 📊 Daily send limits configurable
-- 🔒 API compliance enforced
-
-### 📊
-### Rate Limiting
-
-All telegram types respect NS API rules:
-- 10 second cooldown between telegrams
-- Automatic rate limiting
-- Daily send limits configurable
-**📈 Shows:**
-- ✅ Enabled telegram types
-- 🕐 Last send times
-- 📊 Daily counts and limits
-- 📋 Queue status
-- 🎯 Next scheduled runs
-
----
-
-## 🎓 Citizenship Applications
-
-### 📋ast send times
-- Daily counts
-- Queue status
-
----
-
-## Citizenship Applications
-
-### Overview
-
-Automated citizenship application system with:
-- Custom questionnaires
-- Nation verification
-- Proxy/VPN detection
-- IP security checks
-- Discord integration
-
-### Setup
-
-#### 1. Configure Transcript Channel
-
-```
-?menu → Citizenship Applications → Setup Transcript Channel
-```
-
-This is where applications are posted for admin review.
-
-#### 2. Setup Proxy Check (Optional but Recommended)
-
-Get a free API key from https://proxycheck.io
-
-```
-?menu → Setup & Settings → Setup Proxy Check API Key
-```
-
-#### 3. Customize Questions
-
-```
-?menu → Citizenship Applications → Manage Questions
-```
-
-**Default Questions:**
-1. What is your main NationStates nation?
-2. Why do you want to join our region?
-3. Have you been a member of any other regions?
-
-**Question Types:**
-- **Text Input** - Free-form responses
-- **Multiple Choice** - Pre-defined options
-- **Conditional** - Show based on previous answers
-
-### Application Process
-
-#### User Experience
-
-1. User types `?citizenship` in Discord
-2. Bot sends DM with questionnaire
-3. User answers questions in DMs
-4. Bot sends verification link
-5. User clicks link, verifies nation ownership
-6. Application posted to transcript channel
-
-#### Verification Link
-
-The link performs:
-- **Nation Verification** - Confirms user owns the nation
-- **IP Capture** - Records IP address (encrypted)
-- **Proxy Check** - Detects VPNs/proxies (if API key configured)
-- **Resident Matching** - Checks if IP matches existing residents
-
-#### Admin Review
-
-Application appears in transcript channel with security information and approve/deny buttons.
-
-### Privacy & Security
-
-**Data Encryption:**
-- All IP addresses encrypted with AES-256
-- IP hashes stored for matching
-- Original IPs only visible to admins
-
-**Data Retention:**
-- Applications stored indefinitely (configurable)
-- IP data only accessible by origin server admins
-- Delete on request
-
-**Access Control:**
-- Only admins can view full applications
-- Regular users cannot access IP data
-- Audit logging for all access
-
----
-
-## Resident Management
-
-### Overview
-
-Track and manage residents across your NationStates regions with:
+Track and manage residents with:
 - Bulk import from CSV/Google Sheets
-- Cross-server search
-- IP address tracking
-- Ban management
-- Privacy controls
+- Cross-server search with privacy controls
+- IP address tracking (encrypted)
+- Verification status tracking
 
-### Resident Import
+### Import Residents
 
-#### From CSV File
+**From CSV File:**
 
-**Required Columns:**
-- `nation` - NationStates nation name (underscores for spaces)
+Required columns: `nation`
 
-**Optional Columns:**
-- `discord_username` - Discord username
-- `discord_id` - Discord user ID (for verification matching)
-- `ip_address` - IP address (will be encrypted)
-- `notes` - Admin notes
-- `banned` - 0 or 1
+Optional columns: `discord_id`, `discord_username`, `ip_address`, `notes`, `banned`
 
-**Import via CLI:**
 ```bash
-python cli/cli_data.py residents residents_template.csv
+python cli/cli_data.py residents residents.csv
 ```
 
-#### From Google Sheets
-
+**From Google Sheets:**
 ```bash
 python cli/cli_data.py residents "https://docs.google.com/spreadsheets/d/SHEET_ID/edit"
 ```
 
-### Searching Residents
+### Search Residents
 
-#### Local Search (Current Server Only)
-
+**Local Search (Current Server):**
 ```
 ?listresident john
 ```
 
-Returns:
-- Nation names matching "john"
-- Discord usernames
-- Verification status
-- Ban status
-- IP addresses (admins only)
-- Notes
-
-#### Cross-Server Search
-
+**Cross-Server Search:**
 ```
 ?residents john
 ```
 
-Searches all servers that have authorized your server.
-
 ### Privacy Controls
 
-**What's Shared in Cross-Server Search:**
-- Nation names
-- Discord usernames (if not sensitive)
-- Verification status
-- Basic info
-
-**What's NOT Shared:**
-- IP addresses (origin server admins only)
-- Personal notes
-- Ban reasons (unless public)
-
-**Revoking Access:**
-```
-?menu → Residents Management → Revoke Guild Access
-```
+**Cross-Server Access:**
+- 👥 Other servers can search your resident database
+- 🔐 IP addresses only visible to origin server admins
+- 👀 Other servers see nation names and basic info only
+- ❌ Access can be revoked anytime
 
 ---
 
-## Security & Privacy
+## 🔐 Security & Privacy
 
 ### Encryption
 
-**What's Encrypted:**
-- Discord bot token (AES-256)
-- NationStates passwords (AES-256)
-- IP addresses (AES-256)
-- API keys (AES-256)
-- Verification tokens (Fernet)
+**Encrypted Data:**
+- 🔐 Discord bot token (AES-256)
+- 🔐 NationStates passwords (AES-256)
+- 🔐 IP addresses (AES-256)
+- 🔐 API keys (AES-256)
+- 🔐 Verification tokens (Fernet)
 
 **Encryption Key:**
 - Generated on first run
@@ -1044,13 +471,13 @@ Searches all servers that have authorized your server.
 
 **Storage:**
 - IP addresses encrypted before storage
-- SHA-256 hash stored for matching
-- Prefix hash (first 3 octets) for subnet matching
+- SHA-256 hashes stored for matching
+- Prefix hashes for subnet matching
 
 **Access:**
 - Only admins can view IPs
 - Only admins of the origin server
-- Audit logging for all IP access
+- Audit logging for all access
 
 ### Audit Logging
 
@@ -1059,21 +486,20 @@ Searches all servers that have authorized your server.
 - Configuration changes
 - Verification attempts
 - IP address access
-- Ban/unban actions
 - Cross-server data access
 
-**Log Location:**
+**Log Locations:**
 - `bot.log` - Main log file
-- `logs/` directory - Historical logs
+- `logs/` - Historical logs
 
 ---
 
-## Production Deployment
+## 🚀 Production Deployment
 
 ### Server Requirements
 
 **Minimum:**
-- Ubuntu 20.04 or newer
+- Ubuntu 20.04+
 - Python 3.11+
 - 1GB RAM
 - 10GB disk space
@@ -1083,62 +509,39 @@ Searches all servers that have authorized your server.
 - Python 3.11+
 - 2GB RAM
 - 20GB disk space
-- Static IP (for verification server)
 
-### Installation
+### Installation Steps
 
-#### 1. System Setup
-
+**1. Update System:**
 ```bash
-# Update system
 sudo apt update && sudo apt upgrade -y
-
-# Install Python 3.11
-sudo apt install python3.11 python3.11-venv python3-pip -y
-
-# Install system dependencies
-sudo apt install git sqlite3 -y
+sudo apt install python3.11 python3.11-venv python3-pip git sqlite3 -y
 ```
 
-#### 2. Create User
-
+**2. Create User:**
 ```bash
-# Create dedicated user
 sudo useradd -r -s /bin/bash -m -d /opt/echobot echobot
-
-# Switch to user
 sudo su - echobot
 ```
 
-#### 3. Clone and Setup
-
+**3. Clone and Setup:**
 ```bash
-# Clone repository
 git clone https://github.com/goldcyper/ns_echo_bot.git
 cd ns_echo_bot
-
-# Create virtual environment
 python3.11 -m venv venv
 source venv/bin/activate
-
-# Install dependencies
 pip install -r requirements.txt
 ```
 
-#### 4. Configure Bot
-
+**4. Configure Bot:**
 ```bash
-# Run initial setup
-python bot.py
-# Enter Discord bot token when prompted
-# Bot will create database and encrypt token
-# Press Ctrl+C after successful start
+python cli/cli_setup.py token
+python cli/cli_setup.py guild
 ```
 
-#### 5. Setup Systemd Service
+**5. Setup Systemd Service:**
 
 Create `/etc/systemd/system/echobot.service`:
-
 ```ini
 [Unit]
 Description=NationStates Echo Bot
@@ -1157,8 +560,7 @@ RestartSec=10
 WantedBy=multi-user.target
 ```
 
-Enable and start:
-
+**6. Enable & Start:**
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl enable echobot
@@ -1170,145 +572,74 @@ sudo systemctl start echobot
 **Check Status:**
 ```bash
 sudo systemctl status echobot
-```
-
-**View Logs:**
-```bash
-# Live logs
 sudo journalctl -u echobot -f
-
-# Last 100 lines
-sudo journalctl -u echobot -n 100
 ```
 
-**Restart Bot:**
+**Restart:**
 ```bash
 sudo systemctl restart echobot
 ```
 
-### Backup
+### Backups
 
-**Database Backup:**
+**Manual Backup:**
 ```bash
-# Manual backup
 cp /opt/echobot/ns_echo_bot/echo.db /backup/echo.db.$(date +%Y%m%d)
-
-# Automated daily backup (crontab)
-0 2 * * * cp /opt/echobot/ns_echo_bot/echo.db /backup/echo.db.$(date +\%Y\%m\%d)
 ```
 
-### Updates
-
-**Update Bot:**
+**Database Backup Tool:**
 ```bash
-# Stop bot
-sudo systemctl stop echobot
-
-# Switch to bot user
-sudo su - echobot
-cd ns_echo_bot
-
-# Backup database first
-cp echo.db echo.db.backup
-
-# Pull updates
-git pull
-
-# Activate venv and update dependencies
-source venv/bin/activate
-pip install -r requirements.txt --upgrade
-
-# Exit to root
-exit
-
-# Start bot
-sudo systemctl start echobot
+python cli/cli_data.py backup
 ```
 
 ---
 
-## Developer Guide
+## 👨‍💻 Developer Guide
 
 ### Project Structure
 
 ```
 ns_echo_bot/
-├── bot.py                   # Main bot entry point
-├── echo_api.py              # NationStates API service
-├── db_echo.py               # Database operations
-├── cli/                     # Command-line tools
-│   ├── cli_setup.py         # Configuration
-│   ├── cli_server.py        # Server management
-│   └── cli_data.py          # Data management
-├── handlers/                # Command handlers
-│   ├── config_handlers.py   # Configuration commands
-│   ├── wa_commands.py       # WA-related commands
-│   ├── region_handlers.py   # Region management
-│   └── ...
-├── modules/                 # Core functionality
-│   ├── auto_telegram.py     # Telegram automation
-│   ├── wa_update.py         # WA data updates
-│   ├── ns_data_processing.py # NS API helpers
-│   └── ...
-├── utils/                   # Utility functions
-│   ├── database/            # DB utilities
-│   ├── nationstates/        # NS API wrappers
-│   └── discord/             # Discord helpers
-├── lib/                     # Core library modules
-│   ├── menus.py             # Interactive menu system
-│   ├── database_coordinator.py # Database coordination
-│   ├── echo_api_status.py   # API status management
-│   ├── memory_tools.py      # Memory monitoring
-│   ├── proxy_verification_server.py # Verification server
-│   ├── simple_server.py     # HTTP server
-│   └── peak_processing_optimizer.py # Performance optimizer
-├── config/                  # Configuration & credentials
-│   ├── config.json          # Bot configuration
-│   ├── key.key              # Encryption key
-│   ├── token_key.key        # Token encryption key
-│   └── verification_tokens.enc # Verification tokens
-├── data/                    # Runtime state data
-│   └── echo_api_status.json # API status tracking
-├── scripts/                 # Utility scripts
-│   ├── tools.py             # Diagnostic CLI
-│   ├── analyze_memory_log.ps1
-│   └── install_nodejs.sh
-├── templates/               # CSV templates
-│   └── residents_template.csv
-└── assets/                  # Images and assets
-    └── bot.png
+├── bot.py                       # Main bot entry point
+├── db_echo.py                   # Database operations
+├── cli/                         # Command-line tools
+│   ├── cli_setup.py             # Bot configuration
+│   ├── cli_server.py            # Service management
+│   └── cli_data.py              # Data management
+├── handlers/                    # Command handlers
+│   ├── commands.py              # General commands
+│   ├── management.py            # Management commands
+│   ├── handle_resident.py       # Resident commands
+│   └── interactions.py          # Menu & interactions
+├── modules/                     # Core functionality
+│   ├── wa_proposals.py          # WA proposal tracking
+│   ├── wa_update.py             # WA data updates
+│   ├── ns_data_processing.py   # NS API processing
+│   ├── telegram_operations.py   # Telegram automation
+│   ├── rmb_listener.py          # RMB monitoring
+│   └── werewolf/                # Werewolf game (optional)
+├── utils/                       # Utility functions
+├── lib/                         # Core libraries
+│   ├── menus.py                 # Interactive menus
+│   └── memory_tools.py          # Memory management
+├── config/                      # Configuration & keys
+├── data/                        # Runtime state
+└── logs/                        # Log files
 ```
-
-### Database Schema
-
-**Key Tables:**
-- `setup` - Bot configuration per guild
-- `guild_regions` - Guild-to-region mapping
-- `guild_ns_credentials` - Encrypted NS credentials per guild
-- `verified_nations` - Nation verification records
-- `residents` - Resident database
-- `citizenship_applications` - Application records
-- `resolutions` - WA resolutions
-- `nations` - Nation data cache
-- `regions` - Region data cache
 
 ### Adding New Commands
 
-**1. Create Handler Function:**
-
+**1. Create Handler:**
 ```python
 # In handlers/your_handler.py
-
 async def handle_your_command(ctx):
     """Your command description."""
     await ctx.send("Response")
 ```
 
 **2. Register Command:**
-
 ```python
 # In bot.py
-
 @bot.command(name='yourcommand')
 async def yourcommand(ctx):
     """Command help text"""
@@ -1317,133 +648,136 @@ async def yourcommand(ctx):
 
 ### Code Style
 
-**Follow:**
-- PEP 8 style guide
-- Type hints for function parameters
+- PEP 8 compliance
+- Type hints for parameters
 - Docstrings for all functions
 - Comment complex logic
 - Use meaningful variable names
 
-### Contributing
-
-**Process:**
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Make changes and test
-4. Commit: `git commit -m "Add your feature"`
-5. Push: `git push origin feature/your-feature`
-6. Open Pull Request
-
 ---
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Bot Won't Start
 
-**Problem:** Bot crashes on startup
+**Check Python version:**
+```bash
+python --version  # Need 3.11+
+```
 
-**Solutions:**
-1. Check Python version: `python --version` (need 3.11+)
-2. Reinstall dependencies: `pip install -r requirements.txt --force-reinstall`
-3. Check bot token is valid
-4. Delete `echo.db` and restart (resets database)
-5. Check logs in `bot.log`
+**Reinstall dependencies:**
+```bash
+pip install -r requirements.txt --force-reinstall
+```
+
+**Reset database:**
+```bash
+rm echo.db
+python bot.py
+```
+
+**Check logs:**
+```bash
+cat bot.log
+```
 
 ### Commands Not Working
 
-**Problem:** Bot doesn't respond to commands
+**Check bot is online in Discord**
 
-**Solutions:**
-1. Check bot is online in Discord
-2. Verify bot has correct permissions:
-   - Read Messages
-   - Send Messages
-   - Embed Links
-   - Attach Files
-   - Add Reactions
-3. Check command prefix: `?guild_config`
-4. Try `?help` to see if bot responds
+**Verify permissions:**
+- Read Messages
+- Send Messages
+- Embed Links
 
-### Verification Fails
+**Check prefix:**
+```
+?guild_config
+```
 
-**Problem:** Nation verification doesn't work
+### Nation Verification Fails
 
-**Solutions:**
-1. Check nation name spelling (use underscores)
-2. Verify code within 2 minutes
-3. Make sure you're copying full code from NS
-4. Check verification server is running: `http://your-ip:4116/health`
-5. Try `?verify` again
+- Check nation name spelling (use underscores)
+- Verify within 2 minutes
+- Copy full verification code
 
 ### Database Errors
 
-**Problem:** Database-related errors
+**Check database integrity:**
+```bash
+sqlite3 echo.db "PRAGMA integrity_check;"
+```
 
-**Solutions:**
-1. Check `echo.db` file isn't corrupted: `sqlite3 echo.db "PRAGMA integrity_check;"`
-2. Backup and reset: `cp echo.db echo.db.backup && rm echo.db && python bot.py`
-3. Check disk space: `df -h`
-4. Check file permissions: `ls -l echo.db`
-
-### Import Errors
-
-**Problem:** Resident import fails
-
-**Solutions:**
-1. Check CSV format matches template
-2. Verify all required columns present
-3. Check for special characters in data
-4. Ensure IP addresses are valid (if provided)
-5. Try smaller batches (split CSV)
+**Backup and reset:**
+```bash
+cp echo.db echo.db.backup
+rm echo.db
+python bot.py
+```
 
 ---
 
-## FAQ
+## ❓ FAQ
 
-**Q: Do I need to run echo_api.py separately?**
-A: No. The bot auto-starts the Echo API service when needed. You can also use `python cli/cli_server.py both` for coordinated startup.
+**Q: Do I need to run separate services?**
+A: No. The bot handles everything. You can run `python cli/cli_server.py both` for coordinated startup of both bot and API services.
 
-**Q: Can I run multiple bots?**
-A: Yes, but each bot needs its own Discord bot token and database file.
+**Q: Can I run on multiple Discord servers?**
+A: Yes. Use the same bot token on all servers. Each server has independent configuration.
 
 **Q: Is my data secure?**
-A: Yes. All sensitive data is encrypted with AES-256. Keep your `config/key.key` file secure.
+A: Yes. All sensitive data is encrypted with AES-256. Keep `config/key.key` safe.
 
-**Q: How do I backup my data?**
-A: Use `python cli/cli_data.py backup` or copy `echo.db`, `config/key.key`, and `config/verification_tokens.enc` files.
+**Q: How do I backup data?**
+A: Use `python cli/cli_data.py backup` to create a compressed backup.
 
-**Q: What if I lose my encryption key?**
-A: You'll lose access to encrypted data (passwords, IPs). Keep `config/key.key` backed up securely.
-
-**Q: Can I run this on Windows?**
+**Q: Can I run on Windows?**
 A: Yes. All commands work in PowerShell. The bot is cross-platform.
 
-**Q: How do I update the bot?**
-A: `git pull` to get updates, then restart the bot. Database migrates automatically.
-
 **Q: Where are logs stored?**
-A: Main log: `bot.log`. Memory logs: `logs/`. Systemd: `journalctl -u echobot`.
+A: Main: `bot.log`. Historical: `logs/` directory. Systemd: `journalctl -u echobot`.
 
 ---
 
-## Support
+## 🐺 Werewolf Game Module (Optional)
+
+The project includes an optional Werewolf game engine for forum-based games.
+
+### Overview
+- Forum-based Werewolf game using XenForo
+- Automates signup, role assignment, phases, voting
+- Special roles: Big Bad, Hero of Resistance, Recruiter, Counter-Intelligence
+
+### Components
+- `modules/werewolf/` - Game logic and role handling
+- `modules/werewolf/signup.txt` - Signup template
+- `modules/werewolf/werewolf_schema.sql` - Database schema
+
+### Status
+- Optional/advanced feature
+- Core bot works fine without it
+- Requires XenForo forum setup
+
+---
+
+## 📞 Support
 
 **Need Help?**
 
-- 📖 Read this documentation
-- 🐛 Report bugs: [GitHub Issues](https://github.com/goldcyper/ns_echo_bot/issues)
-- 💬 Ask questions: [GitHub Discussions](https://github.com/goldcyper/ns_echo_bot/discussions)
-- ⭐ Star the repo if this helps!
+- 📖 [GitHub Documentation](https://github.com/goldcyper/ns_echo_bot)
+- 🐛 [Report Bugs](https://github.com/goldcyper/ns_echo_bot/issues)
+- 💬 [Ask Questions](https://github.com/goldcyper/ns_echo_bot/discussions)
+- ⭐ Star the repo!
 
 ---
 
 ## 📝 License
 
-See LICENSE file for details.
+MIT License - See [LICENSE](LICENSE) file for details.
 
 ---
 
-**Last Updated:** January 5, 2026  
+**Last Updated:** February 27, 2026  
 **Version:** 2.0  
 **Maintained by:** goldcyper
 
